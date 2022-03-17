@@ -1,4 +1,103 @@
 ﻿
+string[] superHeroNameList =
+{
+    "Groot",
+};
+
+bool isMenuRunning = true;
+do
+{
+    string menuItems;
+
+    Console.WriteLine("Welcome to the superhero application!");
+    Console.WriteLine("Select what to do:");
+    Console.WriteLine("1 - Show a list of superheroes");
+    Console.WriteLine("2 - Show specific hero");
+    Console.WriteLine("3 - Adding a superhero");
+    Console.WriteLine("4 - Deleting a superhero");
+    Console.WriteLine("5 - Exit");
+
+    menuItems = Console.ReadLine();
+
+    switch (menuItems)
+    {
+        case "1":
+            Console.WriteLine("********List of superheroes********");
+            for (int i = 0; i < superHeroNameList.Length; i++)
+            {
+                Console.WriteLine($"{i}. {superHeroNameList[i]}");
+            }
+            Console.WriteLine("****************");
+            break;
+        case "2":
+            Console.WriteLine("Please choose a superhero by number:");
+            for (int i = 0; i < superHeroNameList.Length; i++)
+            {
+                Console.WriteLine($"{i}. {superHeroNameList[i]}");
+            }
+            int.TryParse(Console.ReadLine(), out int chosenNumber);
+            Console.WriteLine($"You have chosen {superHeroNameList[chosenNumber]}");
+
+            Console.WriteLine("Choose what type of info to show:");
+            Console.WriteLine($"1 - GENERAL INFO");
+            Console.WriteLine($"2 - FINANCIAL INFO");
+            string showMenu = Console.ReadLine();
+            if (showMenu == "1")
+            {
+                Console.WriteLine("*********************GENERAL INFO******************");
+                Console.WriteLine($"Hero: {superHeroNameList[chosenNumber]}");
+                Console.WriteLine("Age: " + 25 + " year old");
+                string[] abilityArray = {"Superhuman Strength", "Enhanced Speed" , "Immortality"};
+                Console.WriteLine($"Hero powers: \n {0}, \n {1},\n {2}\n, {abilityArray[0]}, {abilityArray[1]}, {abilityArray[2]}");
+                Console.WriteLine("******************************************** \n \n");
+            }
+            else if (showMenu == "2")
+            {
+                double salary = 2500;
+                int deedTimeInHours1, deedTimeInHours2, deedTimeInHours3;
+                deedTimeInHours1 = 10;
+                deedTimeInHours2 = 4;
+                deedTimeInHours3 = 36;
+                var totalTimeSpent = (deedTimeInHours1 + deedTimeInHours2 + deedTimeInHours3);
+                double rewardMoney = totalTimeSpent * 5;
+                salary += rewardMoney;
+                var averageTime = totalTimeSpent / 3;
+
+                double cookieCost = 1.29;
+                double boughtCookies = Math.Floor(salary / cookieCost);
+                double dailySalary = Math.Round(salary / 30, 2);
+
+
+                Console.WriteLine("************FINANCIAL INFO*****************");
+                Console.WriteLine($"The hero can buy {boughtCookies}");
+                Console.WriteLine($"Our hero earns daily {dailySalary}");
+                Console.WriteLine($"Our hero spent {totalTimeSpent} hours doing deeds");
+                Console.WriteLine($"Our hero on average spent {averageTime} hours per deed");
+                Console.WriteLine($"For the deeds our hero got as a reward {rewardMoney} EUR");
+            }
+
+
+            break;
+        case "3":
+            Console.WriteLine("What is the new superhero name?");
+            string superHeroName = Console.ReadLine();
+            superHeroNameList = superHeroNameList.Append(superHeroName);
+            Console.WriteLine($"SuperHero {superHeroName} Added!");
+            break;
+        case "4":
+            superHeroNameList = superHeroNameList.Remove(3);
+            break;
+        case "5":
+            isMenuRunning = false;
+            Console.WriteLine($"Good bye!");
+            break;
+        default:
+            Console.WriteLine("Please choose from the available menu!");
+            break;
+    }
+} while (isMenuRunning);
+
+
 Console.WriteLine("***********GENERAL INFO*************");
 string name = "Groot";
 int age = 25;
@@ -33,12 +132,13 @@ holding time that a deed took to complete
 -- isEvil or not
 -- monthlySalary
 */
-
+/*
 int deedTimeInHours1 = 10;
 int deedTimeInHours2 = 4;
 int deedTimeInHours3 = 36;
 int monthlySalary = 2500;
 double cookiePrice = 1.29;
+*/
 
 int totalTime = deedTimeInHours1 + deedTimeInHours2 + deedTimeInHours3;
 Console.WriteLine($"The hero spent {totalTime} hours on his deeds.");
