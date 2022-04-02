@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace SuperHeroProject
 {
-    public enum HeroType
-    {
-        Hero,
-        Villain
-    }
-
-    internal class Hero
+    internal class Person
     {
         public string Name { get; set; }
 
@@ -20,38 +14,46 @@ namespace SuperHeroProject
 
         public string Nickname { get; set; }
 
-        public int HeroId { get; set; }
-
-        public HeroType Type { get; set; }
-
-        public int DeedTime { get; set; }
-
-        public Hero()
-        {
-            Name = "John";
-            Surname = "Smith";
-            Nickname = "Hero";
-            HeroId = 0;
-            Type = HeroType.Hero;
-            DeedTime = 0;
-        }
-
-        public Hero(string name, string surname, string nickname,
-            int heroId, HeroType type, int deedTime)
+        public Person(string name, string surname, string nickname)
         {
             Name = name;
             Surname = surname;
             Nickname = nickname;
+        }
+
+        public virtual string PrintInfo() 
+        {
+            return Name + Surname;
+        }
+    }
+    public enum HeroType
+    {
+        Hero,
+        Villain
+    }
+
+    internal class Hero : Person
+    {
+        public int HeroId { get; set; }
+
+        public HeroType Type { get; }
+
+        public int DeedTime { get; set; }
+
+        public Hero(string name, string surname, string nickname,
+            int heroId, int deedTime) : base(name, surname, nickname)
+        {
+            Type = HeroType.Hero;
             HeroId = heroId;
-            Type = type;
+            Type = HeroType.Hero;
             DeedTime = deedTime;
         }
 
-        public void PrintInfo()
+        public override string PrintInfo()
         {
-            Console.WriteLine($"Name: {Name}\n Surname: {Surname}" +
+            return $" Name: {Name}\n Surname: {Surname}" +
                 $"\n Nickname: {Nickname}\n HeroID: {HeroId} " +
-                $"\n Type : {Type} \n Deedtime: {DeedTime}");
+                $"\n Type : {Type} \n Deedtime: {DeedTime} hours";
         }
 
         public int CalculateLevel()
@@ -73,4 +75,30 @@ namespace SuperHeroProject
             return level;
         }
     }
+    internal class Villain : Person
+    {
+
+        public int VillainId { get; set; }
+
+        public HeroType Type { get; }
+
+        public int CrimeTime { get; set; }
+
+        public Villain(string name, string surname, string nickname,
+            int villainId, int crimeTime) : base(name, surname, nickname)
+        {
+            Type = HeroType.Villain;
+            VillainId = villainId;
+            Type = HeroType.Villain;
+            CrimeTime = crimeTime;
+        }
+
+        public override string PrintInfo()
+        {
+            return $" Name: {Name}\n Surname: {Surname}" +
+                $"\n Nickname: {Nickname}\n VillainID: {VillainId} " +
+                $"\n Type : {Type} \n Crimetime: {CrimeTime} hours";
+        }
+    }
+
 }
